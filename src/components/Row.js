@@ -15,15 +15,22 @@ const Row = ({title, id, fetchUrl}) => {
     fetchMovieData();
   }, [fetchMovieData]);
 
+  const clickArrowSlideMovie = (direction) => {
+    if(direction === "left"){
+      document.getElementById(id).scrollLeft -= window.innerWidth - 80 ;
+    }else{
+      document.getElementById(id).scrollLeft += window.innerWidth - 80 ;
+    }
+  }
 
   return (
     <div>
       <h2>{title}</h2>
       <div className="slider">
         <div className="slider__arrow-left">
-          <span className="arrow">{"<"}</span>
+          <span className="arrow" onClick={()=>clickArrowSlideMovie("left")}>{"<"}</span>
         </div>
-        <div id="id" className="row__posters">
+        <div id={id} className="row__posters">
           {movies.map(movie => (
             <img
               key={movie.id}
@@ -34,7 +41,7 @@ const Row = ({title, id, fetchUrl}) => {
           ))}
         </div>
         <div className="slider__arrow-right">
-          <span className="arrow">{">"}</span>
+          <span className="arrow" onClick={()=>clickArrowSlideMovie()}>{">"}</span>
         </div>
       </div>
     </div>
