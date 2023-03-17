@@ -1,10 +1,11 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import axiosInstance from "../api/axios";
 import './Row.css'
 
 const Row = ({title, id, fetchUrl}) => {
 
   const [movies, setMovies] = useState([]);
+  const scrollEl = useRef(null);
 
   const fetchMovieData = useCallback(async () =>{
     const response = await axiosInstance.get(fetchUrl);
@@ -17,9 +18,9 @@ const Row = ({title, id, fetchUrl}) => {
 
   const clickArrowSlideMovie = (direction) => {
     if(direction === "left"){
-      document.getElementById(id).scrollLeft -= window.innerWidth - 80 ;
+      scrollEl.current.scrollLeft -= window.innerWidth - 80 ;
     }else{
-      document.getElementById(id).scrollLeft += window.innerWidth - 80 ;
+      scrollEl.current.scrollLeft += window.innerWidth - 80 ;
     }
   }
 
@@ -30,7 +31,7 @@ const Row = ({title, id, fetchUrl}) => {
         <div className="slider__arrow-left">
           <span className="arrow" onClick={()=>clickArrowSlideMovie("left")}>{"<"}</span>
         </div>
-        <div id={id} className="row__posters">
+        <div ref={scrollEl} id={id}  className="row__posters">
           {movies.map(movie => (
             <img
               key={movie.id}
