@@ -7,7 +7,7 @@ import DetailPage from "./pages/DetailPage";
 import SearchPage from "./pages/SearchPage";
 
 
-function App() {
+const App = () => {
 
   const Layout = () =>{
     return (
