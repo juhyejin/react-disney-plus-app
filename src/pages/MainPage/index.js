@@ -6,7 +6,7 @@ import Row from "../../components/Row";
 import requests from "../../api/request";
 import styled from "styled-components";
 
-function MainPage() {
+const MainPage = () => {
   return (
     <div className="App">
       <Container>
